@@ -14,7 +14,7 @@ echo 'kill旧的服务完成'
  
 echo '启动项目'
 
-nohup java -jar  -Xms128m -Xmx128m -Dreactor.netty.pool.leasingStrategy=lifo /root/DiscoveryGuide/$name/target/$name-1.0.0.jar > log.out  2>&1 &
+nohup java -jar  -Xms128m -Xmx128m -Dreactor.netty.pool.leasingStrategy=lifo /root/DiscoveryGuide/$name/target/$name-1.0.0.jar > gate.out  2>&1 &
 
 echo "tail -f /root/logs/$name/info.log"
 echo '脚本执行结束，请等待项目启动'
