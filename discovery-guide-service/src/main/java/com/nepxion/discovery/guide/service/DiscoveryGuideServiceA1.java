@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 public class DiscoveryGuideServiceA1 {
     public static void main(String[] args) {
-
+    	 System.setProperty("spring.profiles.active", "a1");
         new SpringApplicationBuilder(DiscoveryGuideServiceA1.class).run(args);
     }
 
