@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.nepxion.discovery.common.constant.DiscoveryConstant;
 import com.nepxion.discovery.guide.service.core.CoreImpl;
+import com.nepxion.discovery.guide.service.feign.BFeign;
 
 @RestController
 @ConditionalOnProperty(name = DiscoveryConstant.SPRING_APPLICATION_NAME, havingValue = "discovery-guide-service-a")
@@ -28,11 +29,23 @@ public class ARestImpl extends CoreImpl {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private BFeign bFeign;
 
     @GetMapping(path = "/rest/{value}")
     public String rest(@PathVariable(value = "value") String value) {
         value = getPluginInfo(value);
         value = restTemplate.getForEntity("http://discovery-guide-service-b/rest/" + value, String.class).getBody();
+
+        LOG.info("调用路径：{}", value);
+
+        return value;
+    }
+    
+    @GetMapping(path = "/rest2/{value}")
+    public String rest2(@PathVariable(value = "value") String value) {
+        value = getPluginInfo(value);
+        bFeign.invoke(value);
 
         LOG.info("调用路径：{}", value);
 
